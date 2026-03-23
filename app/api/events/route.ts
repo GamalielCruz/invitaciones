@@ -79,7 +79,7 @@ export async function GET(req: Request) {
  * - title: string (required)
  * - eventType: string (required) - 'wedding' | 'birthday' | 'quinceañera' | 'other'
  * - eventDate: string (required) - ISO date string
- * - template: string (required) - 'isla/0' | 'isla/1' | 'isla/2' | 'isla/4'
+ * - template: string (required) - 'isla/0' | 'isla/1' | 'isla/2' | 'isla/4' | 'isla/5' | 'isla/6'
  * - location: object (optional)
  * - ceremonyLocation: object (optional)
  * - receptionLocation: object (optional)
@@ -139,7 +139,7 @@ export async function POST(req: Request) {
     }
 
     // Validate template
-    const validTemplates = ['isla/0', 'isla/1', 'isla/2', 'isla/4']
+    const validTemplates = ['isla/0', 'isla/1', 'isla/2', 'isla/4', 'isla/5', 'isla/6']
     if (!validTemplates.includes(template)) {
       return NextResponse.json(
         { error: `Invalid template. Must be one of: ${validTemplates.join(', ')}` },

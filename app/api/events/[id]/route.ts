@@ -108,7 +108,7 @@ export async function GET(
  * - slug: object - { current: string }
  * - eventType: string - 'wedding' | 'birthday' | 'quinceañera' | 'other'
  * - eventDate: string - ISO date string
- * - template: string - 'isla/0' | 'isla/1' | 'isla/2' | 'isla/4'
+ * - template: string - 'isla/0' | 'isla/1' | 'isla/2' | 'isla/4' | 'isla/5' | 'isla/6'
  * - location: object
  * - ceremonyLocation: object
  * - receptionLocation: object
@@ -187,7 +187,7 @@ export async function PATCH(
 
     // Validate template if provided
     if (updateFields.template) {
-      const validTemplates = ['isla/0', 'isla/1', 'isla/2', 'isla/4']
+      const validTemplates = ['isla/0', 'isla/1', 'isla/2', 'isla/4', 'isla/5', 'isla/6']
       if (!validTemplates.includes(updateFields.template)) {
         return NextResponse.json(
           { error: `Invalid template. Must be one of: ${validTemplates.join(', ')}` },

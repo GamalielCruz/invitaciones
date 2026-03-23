@@ -4,7 +4,7 @@
 export const dynamic = 'force-dynamic'
 
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { urlFor } from '@/lib/sanity'
 import confetti from 'canvas-confetti'
 
@@ -13,6 +13,7 @@ interface EventData {
   title: string
   description: string
   eventDate: string
+  template?: string
   eventType?: string
   customIcon?: any
   heroImage?: any
@@ -86,6 +87,8 @@ const fontFamilies = {
 export default function Isla5() {
   const searchParams = useSearchParams()
   const eventId = searchParams.get('eventId')
+  const token = searchParams.get('token')
+  const router = useRouter()
   const [eventData, setEventData] = useState<EventData | null>(null)
   const [loading, setLoading] = useState(true)
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false)
@@ -149,6 +152,16 @@ export default function Isla5() {
 
     fetchEvent()
   }, [eventId])
+
+  // Si el usuario está viendo una URL de template distinta a la que indica Sanity,
+  // redirigimos automáticamente para reflejar el `event.template` actualizado.
+  useEffect(() => {
+    if (!eventData?.template) return
+    if (eventData.template === 'isla/5') return
+
+    const tokenQuery = token ? `&token=${encodeURIComponent(token)}` : ''
+    router.replace(`/${eventData.template}?eventId=${eventData._id}${tokenQuery}`)
+  }, [eventData, router, token])
 
   // Cargar Google Fonts dinámicamente
   useEffect(() => {

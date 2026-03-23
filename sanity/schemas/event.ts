@@ -73,6 +73,7 @@ export default defineType({
           { title: 'Template 2 - Cumpleaños Infantil', value: 'isla/2' },
           { title: 'Template 4 - XV Años Minimalista', value: 'isla/4' },
           { title: 'Template 5 - Moderno Gradiente', value: 'isla/5' },
+          { title: 'Template 6 - Bautizo (tierno y formal)', value: 'isla/6' },
         ],
         layout: 'radio',
       },
